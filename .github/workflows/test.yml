@@ -22,8 +22,8 @@ jobs:
           java-version: '20.0.2'
           distribution: 'temurin'
 
-      - name: Install Jmeter
-        run:
+      - name: Install JMeter
+        run: |
           # 1. Download the latest tarball
           wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-5.6.3.tgz
           # 2. Extract it
@@ -33,7 +33,7 @@ jobs:
         run:
           ./apache-jmeter-5.6.3/bin/jmeter -n -t PerformanceTesting.jmx -l results/results.jtl -e -f -o results/html-report -Japi.key=${{secrets.API_KEY}}
 
-      - name: Upload Jmeter Report
+      - name: Upload JMeter Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
