@@ -24,12 +24,14 @@ jobs:
 
       - name: Install Jmeter
         run:
-          # Install JMeter via apt-get
-          sudo apt-get update && sudo apt-get install -y jmeter
+          # 1. Download the latest tarball
+          wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-5.6.3.tgz
+          # 2. Extract it
+          tar -xf apache-jmeter-5.6.3.tgz
 
       - name: Performance Tests
         run:
-          jmeter -n -t PerformanceTesting.jmx -l results/results.jtl -e -o results/html-report -Japi.key=${{secrets.API_KEY}}
+          ./apache-jmeter-5.6.3/bin/jmeter -n -t PerformanceTesting.jmx -l results/results.jtl -e -f -o results/html-report -Japi.key=${{secrets.API_KEY}}
 
       - name: Upload Jmeter Report
         if: always()
