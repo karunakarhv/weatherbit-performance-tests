@@ -21,7 +21,6 @@ jobs:
         with:
           java-version: '20.0.2'
           distribution: 'temurin'
-          cache: 'maven'
 
       - name: Performance Tests
         run:
