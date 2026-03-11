@@ -30,7 +30,8 @@ jobs:
           tar -xf apache-jmeter-5.6.3.tgz
 
       - name: Performance Tests
-        run:
+        run: |
+           mkidr -p results/
           ./apache-jmeter-5.6.3/bin/jmeter -n -t PerformanceTesting.jmx -l results/results.jtl -e -f -o results/html-report -Japi.key=${{secrets.API_KEY}}
 
       - name: Upload JMeter Report
