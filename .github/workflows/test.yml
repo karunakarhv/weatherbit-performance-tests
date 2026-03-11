@@ -22,10 +22,13 @@ jobs:
           java-version: '20.0.2'
           distribution: 'temurin'
 
+      - name: Install Jmeter
+        run:
+          # Install JMeter via apt-get
+          sudo apt-get update && sudo apt-get install -y jmeter
+
       - name: Performance Tests
         run:
-          # Install JMeter via apt-get and run test
-          sudo apt-get update && sudo apt-get install -y jmeter
           jmeter -n -t PerformanceTesting.jmx -l results/results.jtl -e -o results/html-report -Japi.key=${{secrets.API_KEY}}
 
       - name: Upload Jmeter Report
