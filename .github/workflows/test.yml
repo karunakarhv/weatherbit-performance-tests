@@ -31,7 +31,7 @@ jobs:
 
       - name: Performance Tests
         run: |
-           mkidr -p results/
+           mkdir -p results/
           ./apache-jmeter-5.6.3/bin/jmeter -n -t PerformanceTesting.jmx -l results/results.jtl -e -f -o results/html-report -Japi.key=${{secrets.API_KEY}}
 
       - name: Upload JMeter Report
